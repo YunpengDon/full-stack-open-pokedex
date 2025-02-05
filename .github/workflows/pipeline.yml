@@ -30,6 +30,10 @@ jobs:
         run: npm run test
       - name: end to end test
         run: npm run 'test:e2e'
+  tag_release:
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-20.04
+    steps:
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@v1
         env:
