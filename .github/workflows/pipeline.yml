@@ -31,6 +31,6 @@ jobs:
       - name: end to end test
         run: npm run 'test:e2e'
       - name: Bump version and push tag
-        uses: anothrNick/github-tag-action
+        uses: anothrNick/github-tag-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
