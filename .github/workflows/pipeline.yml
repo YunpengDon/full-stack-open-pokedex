@@ -9,7 +9,7 @@ on:
     types: [opened, synchronize]
 
 env:
-  CONDITION_SKIP: ${{ contains(join((github.event.head_commit.message), ' '), '#skip')}}
+  CONDITION_SKIP: ${{ contains(github.event.head_commit.message, '#skip')}}
 
     
 jobs:
