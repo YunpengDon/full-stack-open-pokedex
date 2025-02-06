@@ -8,11 +8,14 @@ on:
     branches: [main]
     types: [opened, synchronize]
 
+env:
+  CONDITION_SKIP: ${{ contains(join(toJson(github.event.commits.*.message)), '#skip')}}
+
     
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name == 'push' && github.env.CONDITION_SKIP == 'false'}}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -33,11 +36,10 @@ jobs:
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name == 'push' && github.env.CONDITION_SKIP == 'false'}}
     steps:
       - uses: actions/checkout@v4
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DRY_RUN: true
