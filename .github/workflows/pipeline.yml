@@ -15,6 +15,7 @@ env:
 jobs:
   simple_test:
     runs-on: ubuntu-20.04
+    name: Build and Test
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -28,10 +29,7 @@ jobs:
         run: npm run build
       - name: unit test
         run: npm run test
-      - name: Update PRs
-        uses: github/update-branch-action@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     if: ${{ github.event_name == 'push' && github.env.CONDITION_SKIP == 'false'}}
