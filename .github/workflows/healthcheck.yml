@@ -13,7 +13,7 @@ jobs:
         uses: johnlokerse/website-healthcheck@v2
         with:
           # Check the following URLs one by one sequentially
-          web-url: https://full-stack-open-pokedex-csux.onrender.com
+          web-url: "https://full-stack-open-pokedex-csux.onrender.com"
           scan-for-text: "Pokémon and Pokémon character names are trademarks of Nintendo"
       - name: Success Discord Notify
         uses: stegzilla/discord-notify@v2
